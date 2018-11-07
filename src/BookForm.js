@@ -12,11 +12,25 @@ class BookForm extends Component {
     };
   }
 
+  onTextChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.postBook(this.state, this.props.authorID);
+  }
+
   render() {
     return (
-      <form>
-        <input type="text" name="title" placeholder="Book Name" />
-        <select name="color">
+      <form onSubmit={this.onSubmit.bind(this)}>
+        <input
+          type="text"
+          name="title"
+          placeholder="Book Name"
+          onChange={this.onTextChange.bind(this)}
+        />
+        <select name="color" onChange={this.onTextChange.bind(this)}>
           <option value="">Color</option>
           <option value="red">Red</option>
           <option value="blue">Blue</option>
@@ -27,7 +41,11 @@ class BookForm extends Component {
           <option value="grey">Grey</option>
           <option value="purple">Purple</option>
         </select>
-        <input type="submit" value="Add Book" />
+        <input
+          type="submit"
+          value="Add Book"
+          onChange={this.onTextChange.bind(this)}
+        />
       </form>
     );
   }

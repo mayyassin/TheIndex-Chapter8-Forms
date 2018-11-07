@@ -14,28 +14,52 @@ class AuthorForm extends Component {
     };
   }
 
+  onTextChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.onPostAuthor(this.state);
+  }
+
   render() {
     return (
-      <form onSubmit={this.submitAuthor}>
+      <form onSubmit={this.onSubmit.bind(this)}>
         <div className="input-group mb-3">
           <div className="input-group-prepend">
             <span className="input-group-text">First Name</span>
           </div>
-          <input type="text" className="form-control" name="first_name" />
+          <input
+            type="text"
+            className="form-control"
+            name="first_name"
+            onChange={this.onTextChange.bind(this)}
+          />
         </div>
 
         <div className="input-group mb-3">
           <div className="input-group-prepend">
             <span className="input-group-text">Last Name</span>
           </div>
-          <input type="text" className="form-control" name="last_name" />
+          <input
+            type="text"
+            className="form-control"
+            name="last_name"
+            onChange={this.onTextChange.bind(this)}
+          />
         </div>
 
         <div className="input-group mb-3">
           <div className="input-group-prepend">
             <span className="input-group-text">Image URL</span>
           </div>
-          <input type="text" className="form-control" name="imageUrl" />
+          <input
+            type="text"
+            className="form-control"
+            name="imageUrl"
+            onChange={this.onTextChange.bind(this)}
+          />
         </div>
         <input type="submit" />
       </form>
